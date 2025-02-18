@@ -6,20 +6,17 @@ import os
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 from sklearn.metrics.pairwise import cosine_similarity
 from tkinter.filedialog import askopenfilename
-from image_processing import extract_features
-from config import FILENAMES_FILE, EMBEDDINGS_FILE
-from header import print_header
+from src.utils.image_processing import extract_features
+from src.utils.config import FILENAMES_FILE, EMBEDDINGS_FILE
+from src.utils.header import print_header
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from src.models.ResNet50 import load_model
-
-# Define BASE_DIR
-BASE_DIR = "C:/Users/joao_/OneDrive/Documents/GitHub/Fashion"
+from colorama import Fore, Style
 
 # Load saved embeddings and filenames
-features_path = os.path.join(BASE_DIR, "data")
-feature_list = pickle.load(open(os.path.join(features_path, "embeddings.pkl"), 'rb'))
-filenames = pickle.load(open(os.path.join(features_path, "filenames.pkl"), 'rb'))
+feature_list = pickle.load(open(EMBEDDINGS_FILE, 'rb'))
+filenames = pickle.load(open(FILENAMES_FILE, 'rb'))
 
 def recommend_similar_images(query_img_path, model, top_n=5):
     """Dado uma imagem de entrada, recomenda imagens visualmente semelhantes."""
@@ -27,11 +24,11 @@ def recommend_similar_images(query_img_path, model, top_n=5):
         query_img_path = askopenfilename()
     
     if not query_img_path:
-        print("Nenhuma imagem foi selecionada.")
+        print(Fore.RED +"\nno image selected" + Style.RESET_ALL)
         return
 
     if len(feature_list) == 0:
-        print("A lista de features está vazia. Execute `main.py` primeiro para gerar os embeddings.")
+        print(Fore.RED + "\nFeatures list is empty. Please run Main.py first." + Style.RESET_ALL)
         return
 
     try:
@@ -45,7 +42,7 @@ def recommend_similar_images(query_img_path, model, top_n=5):
         query_img = cv2.imread(query_img_path)
         query_img = cv2.cvtColor(query_img, cv2.COLOR_BGR2RGB)
         axes[0].imshow(query_img)
-        axes[0].set_title("Imagem de Consulta")
+        axes[0].set_title("Input Image")
         axes[0].axis("off")
 
         # Exibir imagens recomendadas
@@ -58,7 +55,7 @@ def recommend_similar_images(query_img_path, model, top_n=5):
 
         plt.show()
     except Exception as e:
-        print(f"Erro ao recomendar imagens: {e}")
+        print(Fore.RED + f"\nErro ao recomendar imagens: {e}"+ Style.RESET_ALL)
 
 if __name__ == "__main__":
     print_header()
