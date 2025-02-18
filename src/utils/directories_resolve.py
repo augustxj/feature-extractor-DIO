@@ -1,6 +1,6 @@
 import pickle
 import os
-from src.utils.config import FILENAMES_FILE, IMAGES_PATH
+from config import FILENAMES_FILE, IMAGES_PATH
 
 # Load the filenames list
 with open(FILENAMES_FILE, 'rb') as f:
