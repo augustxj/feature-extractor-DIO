@@ -18,8 +18,8 @@ Originally, it was trained on a fashion dataset. The code automatically resizes 
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/augustxj-feature-extractor-dio.git
-   cd augustxj-feature-extractor-dio
+   git clone https://github.com/augustxj/feature-extractor-DIO.git
+   cd feature-extractor-DIO
    ```
 
 2. **Install dependencies**:
