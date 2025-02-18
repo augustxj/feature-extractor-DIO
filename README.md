@@ -61,7 +61,7 @@ python main.py
 - Choose `N` to skip re-extraction and go directly to recommendation
 
 ### Utility Script
-If you face any erros with not found directories, please run:
+If you face any erros with not found directories, go into `\src\utils` and please run:
 ```bash
 python directories_resolve.py
 ```
@@ -73,14 +73,12 @@ Modify `src/utils/config.py` to adjust:
 - Model weights source
 
 ## Dependencies 📦
-- Python 3.8+
-- TensorFlow 2.x
-- NumPy
-- scikit-learn
-- OpenCV
-- colorama
-- matplotlib
-- tqdm
+- tensorflow>=2.18.0
+- numpy>=1.26.0
+- scikit-learn>=1.6.0
+- matplotlib>=3.3.0
+- opencv-python>=4.10.0
+- tqdm>=4.67.0
 
 **Note**: For GPU support, ensure CUDA and cuDNN are installed.
 ## Next Updates 🚧
